@@ -34,13 +34,13 @@ func makeTempDir() string {
 
 func unpackTarball(tarballPath string) {
 	// The gzip and tar commands have been tested and works in both Linux and Windows environments. In Windows, it was tested using GNUWin32 executables. The reason why this is split into two steps instead of running 'tar -ztf file_name' is because the GNUWin32 tar.exe does not support '-z'.
-	cmd := exec.Command("gzip", "-dk", tarballPath)
-	session, err := Start(cmd, GinkgoWriter, GinkgoWriter)
-	Expect(err).ToNot(HaveOccurred())
-	Eventually(session, Config.DefaultTimeoutDuration()).Should(Exit(0))
+	// cmd := exec.Command("gzip", "-dk", tarballPath)
+	// session, err := Start(cmd, GinkgoWriter, GinkgoWriter)
+	// Expect(err).ToNot(HaveOccurred())
+	// Eventually(session, Config.DefaultTimeoutDuration()).Should(Exit(0))
 
-	cmd = exec.Command("tar", "-tf", strings.Trim(tarballPath, ".gz"))
-	session, err = Start(cmd, GinkgoWriter, GinkgoWriter)
+	cmd := exec.Command("tar", "-xtf", tarballPath)
+	session, err := Start(cmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).ToNot(HaveOccurred())
 	Eventually(session, Config.DefaultTimeoutDuration()).Should(Exit(0))
 
