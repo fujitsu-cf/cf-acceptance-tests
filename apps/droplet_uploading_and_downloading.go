@@ -39,7 +39,7 @@ func unpackTarball(tarballPath string) {
 	// Expect(err).ToNot(HaveOccurred())
 	// Eventually(session, Config.DefaultTimeoutDuration()).Should(Exit(0))
 
-	cmd := exec.Command("tar", "-xtf", tarballPath)
+	cmd := exec.Command("tar", "-ztf", tarballPath)
 	session, err := Start(cmd, GinkgoWriter, GinkgoWriter)
 	Expect(err).ToNot(HaveOccurred())
 	Eventually(session, Config.DefaultTimeoutDuration()).Should(Exit(0))
